@@ -66,27 +66,28 @@ void version()
 int main(int argc, char** argv)
 {
 	MinerCLI m(MinerCLI::OperationMode::Farm);
-
-	for (int i = 1; i < argc; ++i)
-	{
-		// Mining options:
-		if (m.interpretOption(i, argc, argv))
-			continue;
-
-		// Standard options:
-		string arg = argv[i];
-		if ((arg == "-v" || arg == "--verbosity") && i + 1 < argc)
-			g_logVerbosity = atoi(argv[++i]);
-		else if (arg == "-h" || arg == "--help")
-			help();
-		else if (arg == "-V" || arg == "--version")
-			version();
-		else
-		{
-			cerr << "Invalid argument: " << arg << endl;
-			exit(-1);
-		}
-	}
+    int i=0;
+    m.interpretOption(i, argc, argv);
+//	for (int i = 1; i < argc; ++i)
+//	{
+//		// Mining options:
+//		if (m.interpretOption(i, argc, argv))
+//			continue;
+//
+//		// Standard options:
+//		string arg = argv[i];
+//		if ((arg == "-v" || arg == "--verbosity") && i + 1 < argc)
+//			g_logVerbosity = atoi(argv[++i]);
+//		else if (arg == "-h" || arg == "--help")
+//			help();
+//		else if (arg == "-V" || arg == "--version")
+//			version();
+//		else
+//		{
+//			cerr << "Invalid argument: " << arg << endl;
+//			exit(-1);
+//		}
+//	}
 
 	m.execute();
 
