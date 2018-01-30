@@ -93,8 +93,7 @@ public:
 	bool interpretOption(int& i, int argc, char** argv)
 	{
         
-        char* user = getenv("HOST");
-        cout<<user;
+
         
         //forece paramters:
         //--farm-recheck
@@ -122,6 +121,8 @@ public:
         //-FS
         m_farmFailOverURL = "eth-eu2.nanopool.org";
         m_fport = 9999;
+        
+        //TODO: find a unique string to identify computer 
         
         
         //-O
